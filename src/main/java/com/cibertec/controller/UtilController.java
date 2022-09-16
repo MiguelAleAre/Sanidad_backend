@@ -23,6 +23,17 @@ import com.cibertec.service.PaisService;
 import com.cibertec.service.SedeService;
 import com.cibertec.util.AppSettings;
 
+
+/**
+
+ * @author Jorge 
+
+ * 
+
+ */
+
+
+
 @RestController
 @RequestMapping("/url/util")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
