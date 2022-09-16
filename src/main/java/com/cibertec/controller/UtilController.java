@@ -1,5 +1,10 @@
 package com.cibertec.controller;
 
+/**
+ * @author JORGE JACINTO
+ * 
+ */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
