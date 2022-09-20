@@ -1,5 +1,10 @@
 package com.cibertec.controller;
 
+/**
+ * @author JORGE JACINTO
+ * 
+ */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +28,6 @@ import com.cibertec.service.PaisService;
 import com.cibertec.service.SedeService;
 import com.cibertec.util.AppSettings;
 
-
-/**
-
- * @author Jorge 
-
- * 
-
- */
 
 
 
