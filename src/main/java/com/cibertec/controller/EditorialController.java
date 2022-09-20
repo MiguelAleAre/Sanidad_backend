@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.util.AppSettings;
 
+/**
+ * @author Jorge 
+ *
+ */
+
 @RestController
 @RequestMapping("/url/editorial")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
