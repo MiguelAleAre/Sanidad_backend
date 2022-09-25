@@ -7,5 +7,5 @@ import com.cibertec.entity.Alumno;
 public interface AlumnoService {
 
 	public abstract List<Alumno> listaTodos();
-
+	public abstract Alumno insertar(Alumno obj);
 }
