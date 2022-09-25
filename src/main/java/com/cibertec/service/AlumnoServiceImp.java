@@ -20,4 +20,10 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	}
 
+	@Override
+	public Alumno insertar(Alumno obj) {
+		
+		return Repository.save(obj);
+	}
+
 }
