@@ -69,7 +69,7 @@ public class SalaController {
 			if (objSalida == null) {
 				lstMensajes.add("No se pudo registrar correctamente");
 			} else {
-				lstMensajes.add("Se registró la prueba con el ID ==> " + objSalida.getIdSala());
+				lstMensajes.add("Se registró la sala con el ID ==> " + objSalida.getIdSala());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
