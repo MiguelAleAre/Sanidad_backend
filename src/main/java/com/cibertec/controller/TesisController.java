@@ -23,6 +23,10 @@ import com.cibertec.entity.Tesis;
 import com.cibertec.service.TesisService;
 import com.cibertec.util.AppSettings;
 
+/**
+ * @author Jorge
+ */
+
 @RestController
 @RequestMapping("/url/tesis")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
