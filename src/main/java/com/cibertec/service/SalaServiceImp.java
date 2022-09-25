@@ -17,7 +17,11 @@ public class SalaServiceImp implements SalaService {
 	@Override
 	public List<Sala> listaTodos() {
 		return Repository.findAll();
+	}
 
+	@Override
+	public Sala insertaSala(Sala obj) {
+		return Repository.save(obj);
 	}
 
 }
