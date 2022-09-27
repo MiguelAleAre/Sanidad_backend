@@ -1,6 +1,7 @@
 package com.cibertec.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class LibroController {
 		return ResponseEntity.ok(lista);
 	}
 	
+	
+	
 	@PostMapping
 	@ResponseBody
 	public ResponseEntity<?> inserta(@Valid @RequestBody Libro obj, Errors errors){
@@ -60,12 +63,28 @@ public class LibroController {
 			return ResponseEntity.ok(salida);
 		}
 		
-		Libro objSalida = libroService.insertaActualizaLibro(obj);
+		try {
+			obj.setIdLibro(0);
+			obj.setFechaRegistro(new Date());
+			obj.setEstado(1);
+			Libro objSalida = libroService.insertaActualizaLibro(obj);
+			if (objSalida == null) {
+				lstMensajes.add("Error en el registro");
+			} else {
+				lstMensajes.add("Se registró exitosamente el libro con el ID ==> " + objSalida.getIdLibro());
+			}
+		} catch (Exception e) {
+			
+			salida.put("errores", lstMensajes);
+			e.printStackTrace();
+		}
+		
+		/*Libro objSalida = libroService.insertaActualizaLibro(obj);
 		if (objSalida == null) {
 			lstMensajes.add("Error en el registro");
 		}else {
-			lstMensajes.add("Se registró el libro con el ID ==> " + objSalida.getIdLibro());
-		}
+			lstMensajes.add("Se registró exitosamente el libro con el ID ==> " + objSalida.getIdLibro());
+		}*/
 		return ResponseEntity.ok(salida);
 	}
 
