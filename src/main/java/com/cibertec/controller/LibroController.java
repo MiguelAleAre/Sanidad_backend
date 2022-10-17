@@ -1,5 +1,9 @@
 package com.cibertec.controller;
 
+/**
+ * @author CAMILA FLORES
+ * */
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,15 +17,12 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 
-/**
- * @author CAMILA FLORES
- * */
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -79,13 +80,23 @@ public class LibroController {
 			e.printStackTrace();
 		}
 		
-		/*Libro objSalida = libroService.insertaActualizaLibro(obj);
-		if (objSalida == null) {
-			lstMensajes.add("Error en el registro");
-		}else {
-			lstMensajes.add("Se registró exitosamente el libro con el ID ==> " + objSalida.getIdLibro());
-		}*/
 		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/porFiltro")
+	@ResponseBody
+	public ResponseEntity<List<Libro>> listaLibroPorFiltro(
+				@RequestParam(name = "titulo", required = false, defaultValue = "" )String titulo, 
+				//@RequestParam(name = "anio" , required = false, defaultValue = "2022" ) String anio,
+				@RequestParam(name = "idCategoria" , required = false, defaultValue = "-1" ) int idCategoria) {
+		
+		/*int anios = 0;
+		anios=Integer.parseInt(anio);*/
+		
+		List<Libro> lista = libroService.listaLibro("%"+titulo+"%",idCategoria);	
+		
+
+		return ResponseEntity.ok(lista);
 	}
 
 }
