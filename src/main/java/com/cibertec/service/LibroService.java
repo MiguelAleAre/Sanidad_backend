@@ -9,5 +9,5 @@ public interface LibroService {
 
 	public abstract List<Libro> listaLibro();
 	public abstract Libro insertaActualizaLibro(Libro obj);
-
+	public abstract List<Libro> listaLibro(String titulo, int idCategoria);
 }
