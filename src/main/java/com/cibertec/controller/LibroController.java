@@ -90,9 +90,6 @@ public class LibroController {
 				//@RequestParam(name = "anio" , required = false, defaultValue = "2022" ) String anio,
 				@RequestParam(name = "idCategoria" , required = false, defaultValue = "-1" ) int idCategoria) {
 		
-		/*int anios = 0;
-		anios=Integer.parseInt(anio);*/
-		
 		List<Libro> lista = libroService.listaLibro("%"+titulo+"%",idCategoria);	
 		
 
