@@ -18,9 +18,11 @@ import org.springframework.validation.ObjectError;
  * */
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,4 +66,14 @@ public class ProveedorController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	
+	@GetMapping("/filtrar")
+	@ResponseBody
+	public ResponseEntity<List<Proveedor>> listaProveedorFiltro(
+			@RequestParam(name = "razonsocial", required = false, defaultValue = "" )String nombre, 
+			@RequestParam(name = "ruc" , required = false, defaultValue = "" ) String dni,
+			@RequestParam(name = "idPais" , required = false, defaultValue = "-1" ) int idUbigeo){
+		List<Proveedor> lista = proveedorService.listaProveedor("%"+nombre+"%", dni, idUbigeo);
+		return ResponseEntity.ok(lista);
+	} 
 }
