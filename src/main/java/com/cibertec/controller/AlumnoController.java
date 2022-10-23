@@ -79,6 +79,7 @@ public class AlumnoController {
 		if (!CollectionUtils.isEmpty(lstMensajes)) {
 			return ResponseEntity.ok(salida);
 		}
+		
 		obj.setFechaRegistro(Calendar.getInstance().getTime());
 		obj.setEstado(1);
 		Alumno objSalida = alumnoService.insertar(obj);
