@@ -1,9 +1,5 @@
 package com.cibertec.controller;
 
-/**
- * @author CAMILA FLORES
- * */
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,90 +22,87 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cibertec.entity.Libro;
-import com.cibertec.service.LibroService;
 import com.cibertec.util.AppSettings;
+import com.cibertec.entity.Sala;
+import com.cibertec.service.SalaService;
+/**
 
+ * @author MIGUEL AREVALO
+
+ * 
+
+ */
 @RestController
-@RequestMapping("/url/libro")
+@RequestMapping("/url/sala")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
-public class LibroController {
+public class SalaController {
 	
 	@Autowired
-	public LibroService libroService;
+	private SalaService salaService;
+
 	
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Libro>> listaLibro(){
-		List<Libro> lista = libroService.listaLibro();
+	public ResponseEntity<List<Sala>> listaSala(){
+		List<Sala> lista = salaService.listaTodos();
 		return ResponseEntity.ok(lista);
 	}
-	
-	
-	
+
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<?> inserta(@Valid @RequestBody Libro obj, Errors errors){
-		HashMap<String, Object> salida = new HashMap<>();
-		List<String> lstMensajes = new ArrayList<String>();
+	public  ResponseEntity<?> insertaSala(@Valid @RequestBody Sala obj, Errors errors){
+		Map<String, Object> salida = new HashMap<>();
+		List<String> lstMensajes = new ArrayList<>();
 		salida.put("errores", lstMensajes);
-		
 		List<ObjectError> lstErrors =  errors.getAllErrors();
 		for (ObjectError objectError : lstErrors) {
 			objectError.getDefaultMessage();
 			lstMensajes.add(objectError.getDefaultMessage());
 		}
-
 		if (!CollectionUtils.isEmpty(lstMensajes)) {
 			return ResponseEntity.ok(salida);
 		}
 		
 		try {
-			obj.setIdLibro(0);
 			obj.setFechaRegistro(new Date());
 			obj.setEstado(1);
-			Libro objSalida = libroService.insertaActualizaLibro(obj);
+		    Sala objSalida = salaService.insertaSala(obj);
 			if (objSalida == null) {
-				lstMensajes.add("Error en el registro");
+				lstMensajes.add("No se pudo registrar correctamente");
 			} else {
-				lstMensajes.add("Se registró exitosamente el libro con el ID ==> " + objSalida.getIdLibro());
+				lstMensajes.add("Se registró la sala con el ID ==> " + objSalida.getIdSala());
 			}
 		} catch (Exception e) {
-			
-			salida.put("errores", lstMensajes);
 			e.printStackTrace();
 		}
-		
 		return ResponseEntity.ok(salida);
 	}
 	
-	@GetMapping("/porFiltro")
+	@GetMapping("/listaSalaPorCampos")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> listaLibroPorFiltro(
-				@RequestParam(name = "titulo", required = false, defaultValue = "" )String titulo, 
-				//@RequestParam(name = "anio" , required = false, defaultValue = "2022" ) String anio,
-				@RequestParam(name = "idCategoria" , required = false, defaultValue = "-1" ) int idCategoria,
-				@RequestParam(name = "estado", required = true, defaultValue = "1") int estado,
-				@RequestParam(name = "anio", required = true, defaultValue = "1") int anio) {
-		
+	public ResponseEntity<Map<String, Object>> listaDocenteNombreDniUbigeo(
+			@RequestParam(name = "numero", required = false, defaultValue = "") String numero,
+			@RequestParam(name = "recursos", required = true, defaultValue = "") String recursos,
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "9999-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "9999-01-01") String fechaFin,
+			@RequestParam(name = "estado", required = false, defaultValue = "1") int estado,
+			@RequestParam(name = "idSede", required = false, defaultValue = "-1") int idSede
+			) {
 		Map<String, Object> salida = new HashMap<>();
-		
 		try {
-			List<Libro> lista = libroService.listaLibro("%"+titulo+"%",idCategoria, estado, anio);	
+			List<Sala> lista = salaService.listaSalaPorCampos("%"+numero+"%","%"+recursos+"%",fechaInicio, fechaFin,estado,idSede);
 			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "NO EXISTE REGISTRO DE DATOS");
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
 			}else {
 				salida.put("lista", lista);
-				salida.put("mensaje", "EXISTEN " + lista.size() + " REGISTROS");
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			salida.put("mensaje", e);
 		}
-		
-		
-
 		return ResponseEntity.ok(salida);
 	}
+	
+	
 
 }
