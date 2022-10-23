@@ -72,6 +72,9 @@ public class AutorController {
 				lstMensajes.add("Se registró el autor con el ID ==> " + objSalida.getIdAutor());
 			}
 		
+			
+			
+			
 		return ResponseEntity.ok(salida);
 	}
 	
