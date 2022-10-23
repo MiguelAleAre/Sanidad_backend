@@ -26,4 +26,10 @@ public class AlumnoServiceImp implements AlumnoService {
 		return Repository.save(obj);
 	}
 
+	@Override
+	public List<Alumno> listaAlumnoPorNombresDniCorreoEstadoPais(String nombre, String dni, String correo, int estado,int pais) {
+
+		return Repository.listaAlumnoPorNombresDniCorreoEstadoPais(nombre, dni, correo, estado, pais);
+	}
+
 }
