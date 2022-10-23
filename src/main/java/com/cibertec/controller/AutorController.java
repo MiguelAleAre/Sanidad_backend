@@ -82,9 +82,9 @@ public class AutorController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listaDocenteNombreDniUbigeo(
 			@RequestParam(name = "nombres", required = false, defaultValue = "") String nombres,
-			@RequestParam(name = "estado", required = false, defaultValue = "1") int estado,
+			@RequestParam(name = "estado", required = true, defaultValue = "1") String estado,
 			@RequestParam(name = "idGrado", required = false, defaultValue = "-1") int idGrado,
-			@RequestParam(name = "fechInicio", required = true, defaultValue = "9999-01-01") String fechInicio,			
+			@RequestParam(name = "fechInicio", required = false, defaultValue = "9999-01-01") String fechInicio,			
 			@RequestParam(name = "fechFin", required = false, defaultValue = "9999-01-01") String fechFin) {
 		Map<String, Object> salida = new HashMap<>();
 		try {

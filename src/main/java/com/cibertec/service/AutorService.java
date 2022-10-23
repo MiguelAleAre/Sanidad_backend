@@ -8,5 +8,5 @@ public interface AutorService {
 
 	public abstract Autor insertaAutor(Autor obj);
 	
-	public abstract List<Autor> listaAutorporParametros(String nombres, int estado, int idGrado, String fechInicio, String fechFin);
+	public abstract List<Autor> listaAutorporParametros(String nombres, String estado, int idGrado, String fechInicio, String fechFin);
 }

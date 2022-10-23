@@ -21,7 +21,7 @@ public class AutorServiceImp implements AutorService {
 	}
 
 	@Override
-	public List<Autor> listaAutorporParametros(String nombres, int estado, int idGrado, String fechInicio,
+	public List<Autor> listaAutorporParametros(String nombres, String estado, int idGrado, String fechInicio,
 			String fechFin) {
 		
 		return repository.listaAutorporParametros(nombres, estado, idGrado, fechInicio,  fechFin);
