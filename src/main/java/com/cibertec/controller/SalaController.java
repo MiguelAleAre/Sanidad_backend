@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,6 +71,31 @@ public class SalaController {
 				lstMensajes.add("No se pudo registrar correctamente");
 			} else {
 				lstMensajes.add("Se registró la sala con el ID ==> " + objSalida.getIdSala());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/listaSalaPorCampos")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> listaDocenteNombreDniUbigeo(
+			@RequestParam(name = "numero", required = false, defaultValue = "") String numero,
+			@RequestParam(name = "recursos", required = true, defaultValue = "") String recursos,
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "9999-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "9999-01-01") String fechaFin,
+			@RequestParam(name = "estado", required = false, defaultValue = "1") int estado,
+			@RequestParam(name = "idSede", required = false, defaultValue = "-1") int idSede
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Sala> lista = salaService.listaSalaPorCampos("%"+numero+"%","%"+recursos+"%",fechaInicio, fechaFin,estado,idSede);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

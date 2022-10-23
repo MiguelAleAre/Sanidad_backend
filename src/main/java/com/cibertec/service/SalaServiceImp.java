@@ -24,4 +24,10 @@ public class SalaServiceImp implements SalaService {
 		return Repository.save(obj);
 	}
 
+	@Override
+	public List<Sala> listaSalaPorCampos(String numero,String recursos, String fecInicio,
+			String fecFin, int estado, int idSede) {
+		return Repository.listaSalaPorCampos(numero, recursos, fecInicio, fecFin, estado, idSede);
+	}
+
 }
