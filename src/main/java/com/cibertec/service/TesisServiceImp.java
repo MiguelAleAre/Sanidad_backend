@@ -24,6 +24,12 @@ public class TesisServiceImp implements TesisService{
 		return repository.save(obj);
 	}
 
+	@Override
+	public List<Tesis> listaTesisConParametrosTituloTemaEstadoAlumno(String titulo, String tema, int estado,
+			int alumno) {
+		return repository.listaTesisConParametrosTituloTemaEstadoAlumno(titulo, tema, estado, alumno);
+	}
+
 	
 	
 }

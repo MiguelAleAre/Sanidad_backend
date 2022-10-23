@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,7 +34,9 @@ public class Tesis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTesis;
+	@Pattern(regexp = "[a-zA-Z0-9áéíóúñüÁÉÍÓÚÑÜ\\s]{0,200}" , message = "El titulo es hasta 200 caracteres")
 	private String titulo;
+	@Pattern(regexp = "[a-zA-Z0-9áéíóúñüÁÉÍÓÚÑÜ\\s]{0,200}" , message = "El tema es hasta 200 caracteres")
 	private String tema;
 	
 	@Temporal(TemporalType.DATE)
