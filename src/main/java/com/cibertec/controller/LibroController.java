@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -85,15 +86,31 @@ public class LibroController {
 	
 	@GetMapping("/porFiltro")
 	@ResponseBody
-	public ResponseEntity<List<Libro>> listaLibroPorFiltro(
+	public ResponseEntity<Map<String, Object>> listaLibroPorFiltro(
 				@RequestParam(name = "titulo", required = false, defaultValue = "" )String titulo, 
 				//@RequestParam(name = "anio" , required = false, defaultValue = "2022" ) String anio,
-				@RequestParam(name = "idCategoria" , required = false, defaultValue = "-1" ) int idCategoria) {
+				@RequestParam(name = "idCategoria" , required = false, defaultValue = "-1" ) int idCategoria,
+				@RequestParam(name = "estado", required = true, defaultValue = "1") int estado,
+				@RequestParam(name = "anio", required = true, defaultValue = "1") int anio) {
 		
-		List<Libro> lista = libroService.listaLibro("%"+titulo+"%",idCategoria);	
+		Map<String, Object> salida = new HashMap<>();
+		
+		try {
+			List<Libro> lista = libroService.listaLibro("%"+titulo+"%",idCategoria, estado, anio);	
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "NO EXISTE REGISTRO DE DATOS");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "EXISTEN " + lista.size() + " REGISTROS");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", e);
+		}
+		
 		
 
-		return ResponseEntity.ok(lista);
+		return ResponseEntity.ok(salida);
 	}
 
 }
