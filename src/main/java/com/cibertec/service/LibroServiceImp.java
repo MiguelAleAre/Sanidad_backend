@@ -25,7 +25,7 @@ public class LibroServiceImp implements LibroService {
 	}
 
 	@Override
-	public List<Libro> listaLibro(String titulo, int idCategoria) {
-		return repository.listaLibro(titulo, idCategoria);
+	public List<Libro> listaLibro(String titulo, int idCategoria, int estado, int anio) {
+		return repository.listaLibro(titulo, idCategoria, estado, anio);
 	}
 }
