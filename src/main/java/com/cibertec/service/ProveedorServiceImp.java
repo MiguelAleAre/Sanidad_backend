@@ -21,9 +21,9 @@ public class ProveedorServiceImp implements ProveedorService {
 	}
 
 	@Override
-	public List<Proveedor> listaProveedor(String nombre, String ruc, int idPais) {
+	public List<Proveedor> listaProveedor(String razSocial, String ruc, String contacto, int idPais, int estado) {
 		// TODO Auto-generated method stub
-		return repo.listaProveedor(nombre, ruc, idPais);
+		return repo.listaProveedor(razSocial, ruc, contacto, idPais, estado);
 	}
 
 }
