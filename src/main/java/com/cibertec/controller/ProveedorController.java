@@ -70,10 +70,12 @@ public class ProveedorController {
 	@GetMapping("/filtrar")
 	@ResponseBody
 	public ResponseEntity<List<Proveedor>> listaProveedorFiltro(
-			@RequestParam(name = "razonsocial", required = false, defaultValue = "" )String nombre, 
-			@RequestParam(name = "ruc" , required = false, defaultValue = "" ) String dni,
-			@RequestParam(name = "idPais" , required = false, defaultValue = "-1" ) int idUbigeo){
-		List<Proveedor> lista = proveedorService.listaProveedor("%"+nombre+"%", dni, idUbigeo);
+			@RequestParam(name = "razonsocial", required = false, defaultValue = "" )String razSocial, 
+			@RequestParam(name = "ruc" , required = false, defaultValue = "" ) String ruc,
+			@RequestParam(name = "contacto", required = false, defaultValue = "" )String contacto,
+			@RequestParam(name = "idPais" , required = false, defaultValue = "-1" ) int idUbigeo,
+			@RequestParam(name = "estado" , required = false, defaultValue = "-1" ) int estado){
+		List<Proveedor> lista = proveedorService.listaProveedor("%"+razSocial+"%", ruc, "%"+contacto+"%", idUbigeo, estado);
 		return ResponseEntity.ok(lista);
 	} 
 }
