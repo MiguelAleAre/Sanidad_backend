@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,15 +19,20 @@ import com.cibertec.entity.Alumno;
 import com.cibertec.entity.Categoria;
 import com.cibertec.entity.Grado;
 import com.cibertec.entity.Modalidad;
+import com.cibertec.entity.Nivel;
 import com.cibertec.entity.Pais;
 import com.cibertec.entity.Sede;
-import com.cibertec.service.AlumnoService;
-import com.cibertec.service.CategoriaService;
-import com.cibertec.service.GradoService;
-import com.cibertec.service.ModalidadService;
-import com.cibertec.service.PaisService;
-import com.cibertec.service.SedeService;
+import com.cibertec.entity.Sexo;
+import com.cibertec.entity.Vacuna;
+import com.cibertec.entity.Condicion;
+import com.cibertec.service.SexoService;
+
+import com.cibertec.service.CondicionService;
+import com.cibertec.service.NivelService;
 import com.cibertec.util.AppSettings;
+import com.cibertec.entity.Nivelgrado;
+import com.cibertec.service.UbigeoService;
+import com.cibertec.service.VacunaService;
 
 
 
@@ -37,59 +43,69 @@ import com.cibertec.util.AppSettings;
 public class UtilController {
 
 	@Autowired
-	private PaisService paisService;
+	private SexoService sexoService;
+	
+	@Autowired
+	private CondicionService condService;
+	
+	@Autowired
+	private NivelService nivService;
+	
+	@Autowired
+	private VacunaService vanService;
+	
+	@GetMapping("/listaVacunas")
+	@ResponseBody
+	public List<Vacuna> listaVacuna() {
+		return vanService.listaVacunas();
+	}
+	
 
-	@Autowired
-	private GradoService gradoService;
 
-	@Autowired
-	private CategoriaService categoriaService;
-	
-	@Autowired
-	private AlumnoService alumnoService;
-	
-	@Autowired
-	private ModalidadService modalidadService;
-	
-	@Autowired
-	private SedeService sedeService;
-	
-	@GetMapping("/listaPais")
+	@GetMapping("/listaNiveles")
 	@ResponseBody
-	public List<Pais> listaPais() {
-		return paisService.listaTodos();
+	public List<Nivel> listaNivel() {
+		return nivService.listaTodos();
+	}
+	
+
+	@GetMapping("/listaSexo")
+	@ResponseBody
+	public List<Sexo> listaSexo() {
+		return sexoService.listaTodos();
+	}
+	
+	@GetMapping("/listaCondicion")
+	@ResponseBody
+	public List<Condicion> listaCondicion() {
+		return condService.listaTodos();
+	}
+	
+
+	
+
+	
+	
+    @Autowired
+	private UbigeoService ubigeoService;
+
+
+	@GetMapping("/listaDepartamentos")
+	@ResponseBody
+	public List<String> listaDepartamentos() {
+		return ubigeoService.listaDepartamentos();
 	}
 
-	@GetMapping("/listaCategoria")
+	@GetMapping("/listaProvincias/{paramDep}")
 	@ResponseBody
-	public List<Categoria> listaCategoria() {
-		return categoriaService.listaTodos();
-	}
-	
-	@GetMapping("/listaGrado")
-	@ResponseBody
-	public List<Grado> listaGrado() {
-		return gradoService.listaTodos();
+	public List<String> listaProvincias(@PathVariable("paramDep") String dep) {
+		return ubigeoService.listaProvincias(dep);
 	}
 
-	@GetMapping("/listaModalidad")
+	@GetMapping("/listaDistritos/{paramDep}/{paramProv}")
 	@ResponseBody
-	public List<Modalidad> listaModalidad() {
-		return modalidadService.listaTodos();
-				
+	public List<Nivelgrado> listaDistritos(@PathVariable("paramDep") String dep, @PathVariable("paramProv") String prov) {
+		return ubigeoService.listaDistritos(dep, prov);
 	}
 	
-	@GetMapping("/listaSede")
-	@ResponseBody
-	public List<Sede> listaSede() {
-		return sedeService.listaTodos();
-				
-	}
-	
-	@GetMapping("/listaAlumno")
-	@ResponseBody
-	public List<Alumno> listaAlumno() {
-		return alumnoService.listaTodos();
-				
-	}
 }

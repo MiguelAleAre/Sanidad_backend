@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "prueba")
 public class Prueba {
@@ -31,4 +30,30 @@ public class Prueba {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPais")
 	private Pais pais;
+
+	public int getIdPrueba() {
+		return idPrueba;
+	}
+
+	public void setIdPrueba(int idPrueba) {
+		this.idPrueba = idPrueba;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+	
+	
 }

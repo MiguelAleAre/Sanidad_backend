@@ -8,8 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @EqualsAndHashCode
 @Embeddable
 public class UsuarioHasRolPK implements Serializable {
@@ -18,5 +17,22 @@ public class UsuarioHasRolPK implements Serializable {
 
 	private int idUsuario;
 	private int idRol;
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public int getIdRol() {
+		return idRol;
+	}
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }

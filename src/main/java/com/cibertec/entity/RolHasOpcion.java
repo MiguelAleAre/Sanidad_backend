@@ -8,8 +8,7 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-@Getter
-@Setter
+
 @Entity
 @Table(name = "rol_has_opcion")
 public class RolHasOpcion {
@@ -26,6 +25,31 @@ public class RolHasOpcion {
 	@JoinColumn(name = "idOpcion", nullable = false, insertable = false, updatable = false)
 	private Opcion opcion;
 
+	public RolHasOpcionPK getRolHasOpcionPK() {
+		return rolHasOpcionPK;
+	}
+
+	public void setRolHasOpcionPK(RolHasOpcionPK rolHasOpcionPK) {
+		this.rolHasOpcionPK = rolHasOpcionPK;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Opcion getOpcion() {
+		return opcion;
+	}
+
+	public void setOpcion(Opcion opcion) {
+		this.opcion = opcion;
+	}
+
+	
 	
 	
 }

@@ -11,8 +11,8 @@
 	<groupId>com.cibertec</groupId>
 	<artifactId>dawii_modelo_proyecto_biblioteca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dawii_modelo_proyecto_biblioteca</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Sanidad_Colpolv2</name>
+	<description>Proyecto de Sanidad del colegio Polo</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -73,6 +73,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
 

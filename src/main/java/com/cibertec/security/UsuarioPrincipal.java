@@ -18,8 +18,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.apachecommons.CommonsLog;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @CommonsLog
 @ToString
@@ -33,6 +31,10 @@ public class UsuarioPrincipal implements UserDetails {
 	private static String nombreCompleto;
 	private Collection<? extends GrantedAuthority> authorities;
 	private List<Opcion> opciones;
+	
+	
+	
+	
 	
 	public static UsuarioPrincipal build(Usuario usuario, List<Rol> roles, List<Opcion> opciones) {
 		log.info(">>>UsuarioPrincipal >> " + usuario);
@@ -86,6 +88,54 @@ public class UsuarioPrincipal implements UserDetails {
 	
 	public int getIdUsuario() {
 		return idUsuario;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
+	public List<Opcion> getOpciones() {
+		return opciones;
+	}
+
+	public void setOpciones(List<Opcion> opciones) {
+		this.opciones = opciones;
+	}
+
+	public static org.apache.commons.logging.Log getLog() {
+		return log;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public static void setNombreCompleto(String nombreCompleto) {
+		UsuarioPrincipal.nombreCompleto = nombreCompleto;
+	}
+
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 
 }
