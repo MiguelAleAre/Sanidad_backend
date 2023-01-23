@@ -34,7 +34,7 @@ public class TopicoEstudiante {
 	private String incidente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date fechaRegistro;
 	
 	private String medicamento;

@@ -26,6 +26,8 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 
 	@Override
 	public TopicoEstudiante insertarTopicoEstudiante(TopicoEstudiante obj) {
+		
+		
 		return repository.save(obj);
 	}
 
@@ -45,10 +47,10 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 	@Override
 	public List<TopicoEstudiante> historialTopicoPorFechas(String fechaini, String fechafin) {
 
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha = LocalDate.parse(fechaini, formato); 
 		
-		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha2 = LocalDate.parse(fechafin, formato); 
 		
 		
@@ -57,15 +59,15 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 		
 		Date date2 = java.sql.Date.valueOf(fecha2);
 		
-		return repository.historialTopicoPorFechas(date2, date1);
+		return repository.historialTopicoPorFechas(date1, date2);
 	}
 
 	@Override
 	public List<TopicoEstudiante> historialTopicoPorFechasMensual(String fechaini, String fechafin) {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha = LocalDate.parse(fechaini, formato); 
 		
-		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha2 = LocalDate.parse(fechafin, formato); 
 		
 //		Date fechaNacimiento2 = sdf2.parse(fechFin);
@@ -84,10 +86,10 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 
 	@Override
 	public List<TopicoEstudiante> historialTopicoPorFechasAnual(String fechaini, String fechafin) {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha = LocalDate.parse(fechaini, formato); 
 		
-		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha2 = LocalDate.parse(fechafin, formato); 
 		
 //		Date fechaNacimiento2 = sdf2.parse(fechFin);
@@ -106,10 +108,10 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 
 	@Override
 	public List<TopicoEstudiante> historialTopicoPorFechasSemanal(String fechaini, String fechafin) {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha = LocalDate.parse(fechaini, formato); 
 		
-		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha2 = LocalDate.parse(fechafin, formato); 
 		
         fecha = LocalDate.now();
