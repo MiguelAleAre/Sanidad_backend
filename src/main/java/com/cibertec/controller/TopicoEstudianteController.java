@@ -105,8 +105,8 @@ public class TopicoEstudianteController {
 	@GetMapping("/historialTopicoFechas")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> historialTopicoFechas(
-			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
-			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
 			) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
@@ -126,14 +126,14 @@ public class TopicoEstudianteController {
 	@GetMapping("/historialTopicoFechasAnual")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> historialTopicoFechasAnual(
-			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
-			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
 			) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechasAnual(fechaInicio, fechaFin);
 			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+				salida.put("mensaje", "No hay datos registrados el ultimo año");
 			}else {
 				salida.put("lista", lista);
 				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
@@ -147,14 +147,14 @@ public class TopicoEstudianteController {
 	@GetMapping("/historialTopicoFechasMensual")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> historialTopicoFechasMensual(
-			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
-			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
 			) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechasMensual(fechaInicio, fechaFin);
 			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+				salida.put("mensaje", "No hay datos registrados el ultimo mes");
 			}else {
 				salida.put("lista", lista);
 				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
@@ -168,14 +168,14 @@ public class TopicoEstudianteController {
 	@GetMapping("/historialTopicoFechasSemanal")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> historialTopicoFechasSemanal(
-			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
-			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
 			) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechasSemanal(fechaInicio, fechaFin);
 			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+				salida.put("mensaje", "No hay datos registrados la ultima semana");
 			}else {
 				salida.put("lista", lista);
 				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
