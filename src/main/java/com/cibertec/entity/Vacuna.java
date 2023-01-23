@@ -13,11 +13,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Vacuna")
+@Table(name = "vacuna")
 public class Vacuna {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idVacuna;
-	private String Vacuna;
+	private int idvacuna;
+	
+	private String vacuna;
 }
