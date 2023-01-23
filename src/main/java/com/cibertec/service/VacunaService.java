@@ -8,5 +8,6 @@ public interface VacunaService {
 
 
 	List<Vacuna> listaVacunas();
+	List<Vacuna> listaVacunasPorVacuna(String vacuna);
 	
 }

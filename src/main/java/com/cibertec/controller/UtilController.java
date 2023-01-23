@@ -15,13 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cibertec.entity.Alumno;
-import com.cibertec.entity.Categoria;
-import com.cibertec.entity.Grado;
-import com.cibertec.entity.Modalidad;
+
 import com.cibertec.entity.Nivel;
-import com.cibertec.entity.Pais;
-import com.cibertec.entity.Sede;
 import com.cibertec.entity.Sexo;
 import com.cibertec.entity.Vacuna;
 import com.cibertec.entity.Condicion;

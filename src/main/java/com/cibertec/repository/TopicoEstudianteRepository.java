@@ -18,7 +18,9 @@ public interface TopicoEstudianteRepository extends JpaRepository<TopicoEstudian
 	public List<TopicoEstudiante> historialEstudiandoPorId(int idEstudiante);
 	
 	@Query("select x from TopicoEstudiante x where (x.fechaRegistro between ?1  and ?2 )")
-	public List<TopicoEstudiante> historialTopicoPorFechas(Calendar fechaini, Calendar fechafin);
+	public List<TopicoEstudiante> historialTopicoPorFechas(Date fechaini, Date fechafin);
 	
+	@Query("select x from TopicoEstudiante x where (x.fechaRegistro between ?1  and ?2 )")
+	public void registroTopicoEstudiantee(int idEstudiante);
 
 }

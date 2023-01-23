@@ -1,25 +1,21 @@
 package com.cibertec.controller;
 
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.util.AppSettings;
 import com.cibertec.service.TopicoEstudianteService;
+import com.cibertec.entity.Sala;
 import com.cibertec.entity.TopicoEstudiante;
-import com.cibertec.repository.TopicoEstudianteRepository;
+
 
 @RestController
 @RequestMapping("/url/topicoestudiante")
@@ -70,7 +67,7 @@ public class TopicoEstudianteController {
 		List<TopicoEstudiante> lista  = null;
 		try {
 		
-				lista = topicoestu.historialEstudiantePorId(idEstudiante);	
+				lista = topicoestu.buscaHistorialAlumno(idEstudiante);	
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +101,90 @@ public class TopicoEstudianteController {
 		return ResponseEntity.ok(salida);
 	}
 	
+	
+	@GetMapping("/historialTopicoFechas")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialTopicoFechas(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialTopicoFechasAnual")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialTopicoFechasAnual(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialTopicoFechasMensual")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialTopicoFechasMensual(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialTopicoFechasSemanal")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialTopicoFechasSemanal(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "01-01-1900") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "01-01-2100") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<TopicoEstudiante> lista = topicoestu.historialTopicoPorFechas(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
 
 	
 	

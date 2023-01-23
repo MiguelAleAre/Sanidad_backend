@@ -7,16 +7,11 @@ import lombok.Setter;
 @Setter
 public class Seleccion {
 	
-	private int idProducto;
-	private String nombre;
-	private double precio;
-	private int cantidad;
-	private double totalParcial;
+	private int idVacuna;
+	private String Vacuna;
+
 	
-	public double getTotalParcial() {
-		totalParcial = precio * cantidad;
-		return totalParcial;
-	}
+
 
 	
 }

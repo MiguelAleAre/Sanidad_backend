@@ -20,4 +20,10 @@ public class VacunaServiceImpl implements VacunaService {
 		return repository.findAll();
 	}
 
+
+	@Override
+	public List<Vacuna> listaVacunasPorVacuna(String vacuna) {
+		return repository.listaPorVacunaLike(vacuna);
+	}
+
 }
