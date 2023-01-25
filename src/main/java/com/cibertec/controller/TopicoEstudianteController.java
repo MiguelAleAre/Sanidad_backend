@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.util.AppSettings;
 import com.cibertec.service.TopicoEstudianteService;
-import com.cibertec.entity.Sala;
 import com.cibertec.entity.TopicoEstudiante;
 
 
