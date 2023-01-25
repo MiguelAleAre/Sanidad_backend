@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.util.AppSettings;
-import com.cibertec.entity.Sala;
 import com.cibertec.service.SalaService;
 /**
 
@@ -36,7 +35,7 @@ import com.cibertec.service.SalaService;
 @RequestMapping("/url/sala")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 public class SalaController {
-	
+	/*
 	@Autowired
 	private SalaService salaService;
 
@@ -104,5 +103,5 @@ public class SalaController {
 	}
 	
 	
-
+*/
 }

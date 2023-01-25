@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cibertec.entity.Sala;
-import com.cibertec.repository.SalaRepository;
+
 
 @Service
 public class SalaServiceImp implements SalaService {
-
+/*
 	@Autowired
 	private SalaRepository Repository;
 
@@ -29,5 +28,5 @@ public class SalaServiceImp implements SalaService {
 			String fecFin, int estado, int idSede) {
 		return Repository.listaSalaPorCampos(numero, recursos, fecInicio, fecFin, estado, idSede);
 	}
-
+*/
 }
