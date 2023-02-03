@@ -60,7 +60,7 @@ public class Auxiliar {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idNivel")
+	@JoinColumn(name = "idnivel")
 	private Nivel nivel;
 	
 }

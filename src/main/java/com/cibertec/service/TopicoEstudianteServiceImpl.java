@@ -72,7 +72,7 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 		
 //		Date fechaNacimiento2 = sdf2.parse(fechFin);
 		
-		fecha = LocalDate.now();
+		fecha = LocalDate.now().plusDays(1);
 		
 		fecha2 = LocalDate.now().minusMonths(1);
 		
@@ -94,7 +94,7 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 		
 //		Date fechaNacimiento2 = sdf2.parse(fechFin);
 		
-		fecha = LocalDate.now();
+		fecha = LocalDate.now().plusDays(1);
 		
 		fecha2 = LocalDate.now().minusYears(1);
 		
@@ -114,7 +114,7 @@ public class TopicoEstudianteServiceImpl implements TopicoEstudianteService{
 		DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate fecha2 = LocalDate.parse(fechafin, formato); 
 		
-        fecha = LocalDate.now();
+        fecha = LocalDate.now().plusDays(1);
 		
 		fecha2 = LocalDate.now().minusWeeks(1);
 		
