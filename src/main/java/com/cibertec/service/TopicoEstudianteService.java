@@ -12,7 +12,6 @@ public interface TopicoEstudianteService {
 	public abstract List<TopicoEstudiante> listaTodosTopicoEstudiante();
 	public abstract TopicoEstudiante insertarTopicoEstudiante(TopicoEstudiante obj);
 	public abstract List<TopicoEstudiante> listaEstudiantePorIncidenteLike(String incidente);
-	//public abstract List<TopicoEstudiante> historialEstudiantePorId(int idEstudiante);
 	public abstract List<TopicoEstudiante> buscaHistorialAlumno(int idEstudiante);
 	public abstract List<TopicoEstudiante> historialTopicoPorFechasMensual(String fechaini, String fechafin);
 	public abstract List<TopicoEstudiante> historialTopicoPorFechasAnual(String fechaini, String fechafin);
