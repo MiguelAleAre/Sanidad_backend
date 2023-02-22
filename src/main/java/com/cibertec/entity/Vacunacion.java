@@ -35,6 +35,8 @@ public class Vacunacion {
 	@Column(unique = true, nullable = false, length = 10)
 	private int idVacunacion;
 	
+	private String Vacunaz;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -59,12 +61,6 @@ public class Vacunacion {
 	@ManyToOne(optional =  false)
 	@JoinColumn(name = "idEstudiante")
 	private Estudiante estudiante;
+
 	
-	@ManyToOne(optional =  false)
-	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
-	
-	@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vacunacion")
-	private List<Vacuna_has_Vacunacion> detallesVacunacion;
 }

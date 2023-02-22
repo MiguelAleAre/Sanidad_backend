@@ -10,23 +10,24 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.cibertec.entity.DataRegistroVacunacion;
-import com.cibertec.entity.Estudiante;
 
-import com.cibertec.entity.Vacuna_has_Vacunacion;
-import com.cibertec.entity.Vacuna_has_VacunacionPK;
+import com.cibertec.entity.Estudiante;
 import com.cibertec.entity.Vacunacion;
 import com.cibertec.entity.Seleccion;
+import com.cibertec.entity.TopicoEstudiante;
 import com.cibertec.entity.Usuario;
 import com.cibertec.entity.Vacuna;
 import com.cibertec.service.EstudianteService;
@@ -35,7 +36,7 @@ import com.cibertec.service.VacunacionService;
 import com.cibertec.util.AppSettings;
 
 @RestController
-@RequestMapping("/url/prestamo")
+@RequestMapping("/url/vacunacion")
 @CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 
 public class VacunacionController {
@@ -74,69 +75,275 @@ public class VacunacionController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@PostMapping("/registroVacunacion")
+	@PostMapping("/registraVacuna1")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> registra(@RequestBody DataRegistroVacunacion bean){
+	public ResponseEntity<Map<String, Object>> insertaVacuna1(@RequestBody Vacunacion obj) {
 		Map<String, Object> salida = new HashMap<>();
-		
-		List<Vacuna_has_Vacunacion> detalles = new ArrayList<Vacuna_has_Vacunacion>();
-		for(Seleccion seleccion: bean.getSeleccionados()) {
-			
-			Vacuna_has_VacunacionPK pk = new Vacuna_has_VacunacionPK();
-			pk.setIdVacuna(seleccion.getIdVacuna());
-			
-			Vacuna_has_Vacunacion lsp = new Vacuna_has_Vacunacion();
-			lsp.setVacunahasvacunacionPK(pk);
-			
-			detalles.add(lsp);
-		}
-		
-		Usuario usuario = new Usuario();
-		usuario.setIdUsuario(1);
-		
 		try {
-			Vacunacion vacunacion = new Vacunacion();
-			vacunacion.setEstudiante(bean.getEstudiante());
-			vacunacion.setDetallesVacunacion(detalles);
-			vacunacion.setUsuario(usuario);
-			vacunacion.setFechaDosis1(Calendar.getInstance().getTime());
+			
+			
+			obj.setVacunaz("Tetanos");
+			
 			Calendar dias = Calendar.getInstance();
 			dias.setTime(new Date());
-			dias.add(Calendar.DATE, 30);
-			vacunacion.setFechaDosis2(dias.getTime());
+			dias.add(Calendar.HOUR, 7);
+			
 			Calendar dias2 = Calendar.getInstance();
 			dias2.setTime(new Date());
-			dias2.add(Calendar.DATE, 60);
-			vacunacion.setFechaDosis3(dias2.getTime());
+			dias2.add(Calendar.MONTH, 3);
 			
-			Vacunacion obj = vacunacionService.insertaVacunacion(vacunacion);
+			Calendar dias3 = Calendar.getInstance();
+			dias3.setTime(new Date());
+			dias3.add(Calendar.MONTH, 6);
 			
-			String mensaje="";
-			if(obj !=null) {
-				mensaje = "Se generó el prestamo con codigo N°: "+ obj.getIdVacunacion()+ "<br><br>";
-				mensaje += "Alumno: " + obj.getEstudiante().getNombrediante()+ "<br><br>";
-				mensaje += "<table class=\"table\"><tr><td>Libro</td><td>Año</td><td>Serie</td></tr>";
-				for(Seleccion s: bean.getSeleccionados()) {
-					mensaje += "<tr><td>" + s.getVacuna();
+			obj.setFechaDosis1(dias.getTime());
+			obj.setFechaDosis2(dias2.getTime());
+			obj.setFechaDosis3(dias3.getTime());
+			
+			obj.setEstado1(1);
+			obj.setEstado2(0);
+			obj.setEstado3(0);
+			
+			
+			
+			Vacunacion objSalida =  vacunacionService.insertaEjemplo1(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "Registro incorrecto");
+			} else {
+				salida.put("mensaje", "Se registro correctamente");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Registro incorrecto");
+		}
+		return ResponseEntity.ok(salida);
+	}
 
-
-				}
-				mensaje += "</table><br>";
-				mensaje += "Fecha de Devolucion: " + obj.getFechaDosis2();
-				mensaje += "</table><br>";
-				mensaje += "Fecha de Devolucion: " + obj.getFechaDosis3();
-				
-				bean.getSeleccionados().clear();
-				salida.put("mensaje", mensaje);
+	@PostMapping("/registraVacuna2")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> insertaVacuna2(@RequestBody Vacunacion obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			
+			
+			obj.setVacunaz("Influenza");
+			
+			Calendar dias = Calendar.getInstance();
+			dias.setTime(new Date());
+			dias.add(Calendar.HOUR, 7);
+			
+			Calendar dias2 = Calendar.getInstance();
+			dias2.setTime(new Date());
+			dias2.add(Calendar.MONTH, 6);
+			
+			Calendar dias3 = Calendar.getInstance();
+			dias3.setTime(new Date());
+			dias3.add(Calendar.MONTH, 12);
+			
+			obj.setFechaDosis1(dias.getTime());
+			obj.setFechaDosis2(dias2.getTime());
+			obj.setFechaDosis3(dias3.getTime());
+			
+			obj.setEstado1(1);
+			obj.setEstado2(0);
+			obj.setEstado3(0);
+			
+			
+			
+			Vacunacion objSalida =  vacunacionService.insertaEjemplo1(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "Registro incorrecto");
+			} else {
+				salida.put("mensaje", "Se registro correctamente");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Registro incorrecto");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialVacunaPorNombre1")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaPorNombre1(
+			@RequestParam(name = "nombre", required = false, defaultValue = "") String nombre
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorNombre1(nombre);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
 			}else {
-				salida.put("mensaje", "No se registro, consulte con el administrador" );
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			salida.put("mensaje", "No se registro, consulte con el administrador");
 		}
 		return ResponseEntity.ok(salida);
-		
 	}
+	
+	@GetMapping("/historialVacunaPorNombre2")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaPorNombre2(
+			@RequestParam(name = "nombre", required = false, defaultValue = "") String nombre
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorNombre2(nombre);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialVacunaFechas")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaFechas(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin,
+			@RequestParam(name = "Vacunaz", required = false, defaultValue = "") String Vacunaz
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorFechas(fechaInicio, fechaFin, Vacunaz);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos disponibles con esas caracteristicas");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialVacunaFechasAnual")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaFechasAnual(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorFechasAnual(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos registrados el ultimo año");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialVacunaFechasMensual")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaFechasMensual(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorFechasMensual(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos registrados el ultimo mes");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/historialVacunaFechasSemanal")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> historialVacunaFechasSemanal(
+			@RequestParam(name = "fechaInicio", required = false, defaultValue = "1900-01-01") String fechaInicio,
+			@RequestParam(name = "fechaFin", required = false, defaultValue = "2100-01-01") String fechaFin
+			) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Vacunacion> lista = vacunacionService.historialVacunasPorFechasSemanal(fechaInicio, fechaFin);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No hay datos registrados la ultima semana");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(salida);
+	}
+
+	
+	@PutMapping("/actualizaVacunacion1")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaVacunacion(@RequestBody Vacunacion obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Vacunacion objSalida = vacunacionService.insertaEjemplo1(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se actualizo de manera correcta");
+			} else {
+				salida.put("mensaje", "Se actualizo correctamente");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se actualizo de manera correcta");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PutMapping("/actualizaVacunacion2")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaVacunacion2(@RequestBody Vacunacion obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Vacunacion objSalida = vacunacionService.insertaEjemplo2(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se actualizo de manera correcta");
+			} else {
+				salida.put("mensaje", "Se actualizo correctamente");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se actualizo de manera correcta");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PutMapping("/actualizaVacunacion3")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaVacunacion3(@RequestBody Vacunacion obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Vacunacion objSalida = vacunacionService.insertaEjemplo3(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se actualizo de manera correcta");
+			} else {
+				salida.put("mensaje", "Se actualizo correctamente");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se actualizo de manera correcta");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
 	
 }
