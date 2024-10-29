@@ -1,6 +1,8 @@
-# Proyecto Backend del DAWII - Cibertec - 20222  14-09-2022
+# Proyecto Backend del Colegio FAP Manuel Polo Jimenez
 ### Spring, Angular, JPA y MYSQL
+
+El proyecto se encuentra en fase de desarrollo desde Diciembre 2022.
 
 ## Autor 
 
-* **Jorge Jacinto ** - [jorgejacinto9701](https://github.com/jorgejacinto9701)
+* **Miguel Arevalo ** - [MiguelAre](https://github.com/MiguelAleAre)
